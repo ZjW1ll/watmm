@@ -1,0 +1,249 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Fundo */
+    --bg: #090909;
+    --bg-secondary: #111111;
+    --surface: #171414;
+    --surface-light: #211b1b;
+
+    /* Vermelhos */
+    --wine: #3A0D16;
+    --wine-light: #5C1324;
+    --crimson: #8A1F34;
+    --accent: #B52845;
+
+    /* Dourado */
+    --gold: #D2A85C;
+    --gold-dark: #A67A36;
+    --gold-light: #E7C98A;
+
+    /* Texto */
+    --text: #E7E0D0;
+    --text-secondary: #B8AA96;
+    --text-muted: #7A7064;
+
+    /* Bordas */
+    --border: #3C2B1F;
+    --border-light: #5B4430;
+
+    /* Sombras */
+    --shadow-red: rgba(181,40,69,.18);
+    --shadow-black: rgba(0,0,0,.8);
+}
+
+/* BODY */
+
+body{
+    background:#090909;
+}
+
+body{
+    background:
+    radial-gradient(circle at top,
+        rgba(120,20,40,.08),
+        transparent 40%),
+
+    radial-gradient(circle at bottom,
+        rgba(255,180,70,.03),
+        transparent 55%),
+
+    #090909;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+    radial-gradient(circle,
+        transparent 55%,
+        rgba(0,0,0,.55) 100%);
+
+    pointer-events:none;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    opacity:.04;
+
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(255,255,255,.03) 3px
+        );
+
+    mix-blend-mode:soft-light;
+
+    pointer-events:none;
+}
+
+/* CONTAINERS */
+
+.container {
+    width: 100%;
+    max-height: 100%;
+    padding: 15px;
+    flex-wrap: wrap;
+}
+
+.cards {
+    display: grid;
+
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+
+    gap: 30px;
+}
+
+/* CARDS */
+
+.card{
+    display: flex;
+    flex-direction: column;
+
+    background:linear-gradient(
+        180deg,
+        #1A1717,
+        #111111
+    );
+
+    border:1px solid #3A2A20;
+
+    border-radius:18px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.45),
+        inset 0 1px rgba(255,255,255,.04);
+
+    width: 100%;
+    max-width: 320px;
+    padding: 10px;
+    aspect-ratio: 7 / 10;
+
+    color: aliceblue;
+
+    text-decoration: none;
+}
+
+.card-img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+.card-name {
+    font-family: "Cormorant Garamond", serif;
+}
+
+.card-infos {
+    font-family: "Inter", sans-serif;
+    color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.card-infos-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    gap: 10px;
+    margin-top: auto;
+    margin-bottom: 0;
+}
+
+/* NAVBAR */
+.navbar{
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 80px;
+    padding: 0 40px;
+    background: rgba(9,9,9,.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(210,168,92,.12);
+    box-sizing: border-box;
+}
+
+.search{
+    width: min(700px, 80%);
+    height: 48px;
+    padding: 0 20px;
+    border-radius: 14px;
+    border: 1px solid #3A2A20;
+    background: #141111;
+    color: #E7E0D0;
+    font-size: 16px;
+    transition: .25s;
+}
+
+.search:focus{
+    outline: none;
+    border-color: #B52845;
+    box-shadow: 0 0 18px rgba(181,40,69,.25);
+}
+
+.search::placeholder{
+    color: rgba(255,255,255,.45);
+}
+
+.navbar-logo{
+    width: fit-content;
+}
+
+.navbar-logo img{
+    height: 80px;
+    width: auto;
+    display: block;
+}
+
+.navbar-search{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* BUTTONS */
+
+button{
+
+    background:linear-gradient(
+        180deg,
+        #8A2037,
+        #5B1224
+    );
+
+    color:#F2E8D5;
+
+    border:1px solid #B8874C;
+
+    transition:.25s;
+}
+
+button:hover{
+
+    background:linear-gradient(
+        180deg,
+        #A62545,
+        #7A1730
+    );
+
+    box-shadow:0 0 20px rgba(181,40,69,.4);
+}
