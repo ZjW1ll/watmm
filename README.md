@@ -1,7 +1,7 @@
 # 🎵 WATMM — We Are The Music Makers
 
 <p align="center">
-  <img src="https://tenor.com/view/bB8oi.gif" alt="We Are The Music Makers" width="500">
+  <img src="/assets/gif/WATMM.gif" alt="We Are The Music Makers" width="500">
 </p>
 
 > *"We are the music makers, and we are the dreamers of dreams."*
@@ -105,6 +105,7 @@ WATMM/
 ├── assets/
 │   ├── albuns/
 │   ├── artistas/
+│   ├── gif/
 │   ├── gravadoras/
 │   └── icon/
 │
