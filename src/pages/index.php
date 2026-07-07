@@ -20,41 +20,50 @@ $gravadoras = $conexao->query('SELECT * FROM gravadoras');
     <link rel="stylesheet" href="../styles/style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <a href="./index.php" class="navbar-logo"><img src="/watmm/assets/icon/icon.webp" alt="Icone Loja Disco" style="filter: invert();"></a>
-        <div class="navbar-search">
-            <input
-                type="text"
-                placeholder="Pesquisar álbum..."
-                class="search"
-            >
-        </div>
-    </nav>
+    <header>
+        <nav class="navbar">
+            <a href="./index.php" class="navbar-logo"><img src="/watmm/assets/icon/icon.webp" alt="Icone Loja Disco" style="filter: invert();"></a>
+            <div class="navbar-search">
+                <input
+                    type="text"
+                    placeholder="Pesquisar álbum..."
+                    class="search"
+                >
+            </div>
+        </nav>
+    </header>
 
-    <section class="container cards">
-        <?php 
-            while($album = $card->fetch_assoc()) {
-                $duracao_segundos = $album['duracao_total_segundos'] % 60;
-                $duracao_minutos = ($album['duracao_total_segundos'] - $duracao_segundos) / 60;
-        ?>
-            <a class="card" href="album.php?id=<?= $album['album_id'] ?>">
-                <img src="/watmm/<?= $album['capa_url'] ?>" alt="Capa do album <?= $album['nome_album'] ?>" class="card-img">
-                <h1 class="card-name"><?= $album['nome_album'] ?></h1>
-                <div class="card-infos-wrapper">
-                    <div class="card-infos">
-                        <span class="artist"><?= $album['nome_artista']?></span>
-                        <span class="release"><?= $album['ano_lancamento'] ?></span>
+    <main>
+        <section class="container cards">
+            <?php 
+                while($album = $card->fetch_assoc()) {
+                    $duracao_segundos = $album['duracao_total_segundos'] % 60;
+                    $duracao_minutos = ($album['duracao_total_segundos'] - $duracao_segundos) / 60;
+            ?>
+                <a class="card" href="album.php?id=<?= $album['album_id'] ?>">
+                    <img src="/watmm/<?= $album['capa_url'] ?>" alt="Capa do album <?= $album['nome_album'] ?>" class="card-img">
+                    <h1 class="card-name"><?= $album['nome_album'] ?></h1>
+                    <div class="card-infos-wrapper">
+                        <div class="card-infos">
+                            <span class="artist"><?= $album['nome_artista']?></span>
+                            <span class="release"><?= $album['ano_lancamento'] ?></span>
+                        </div>
+                        <div class="card-infos">
+                            <span class="tracks"><?= $album['qtd_faixas'] ?> Tracks</span>
+                            <span class="duration"><?= $duracao_minutos  ?>m <?= $duracao_segundos ?>s</span>
+                        </div>
                     </div>
-                    <div class="card-infos">
-                        <span class="tracks"><?= $album['qtd_faixas'] ?> Tracks</span>
-                        <span class="duration"><?= $duracao_minutos  ?>m <?= $duracao_segundos ?>s</span>
-                    </div>
-                </div>
-            </a>
+                </a>
+        
+            <?php } ?>
     
-        <?php } ?>
+        </section>
+    </main>
 
-    </section>
-
+    <footer class="footer">
+        <p>© 2026 WATMM — We Are The Music Makers.</p>
+        <p>Desenvolvido por <a href="https://github.com/ZjW1ll"><strong>Willian Zimmermann Junior</strong></a>.</p>
+        <p>Todos os direitos das capas, artistas e obras pertencem aos seus respectivos proprietários.</p>
+    </footer>
 </body>
 </html>

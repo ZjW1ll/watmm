@@ -247,3 +247,35 @@ button:hover{
 
     box-shadow:0 0 20px rgba(181,40,69,.4);
 }
+
+/* FOOTER */
+.footer {
+    margin-top: 80px;
+    padding: 30px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    background: #0d0d0d;
+    border-top: 1px solid rgba(210, 168, 92, 0.15);
+
+    color: rgba(255, 255, 255, 0.6);
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    text-align: center;
+}
+
+.footer strong {
+    color: #D2A85C;
+    font-weight: 600;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer a {
+    text-decoration: none;
+}
