@@ -9,6 +9,8 @@ CREATE TABLE IF NOT EXISTS artistas (
     id INT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
     pais_origem VARCHAR(60),
+    data_nascimento DATE NULL,
+    data_falecimento DATE NULL,
     biografia TEXT,
     foto_url VARCHAR(255) DEFAULT NULL COMMENT 'URL ou caminho da foto do artista',
     PRIMARY KEY (id)
@@ -33,7 +35,7 @@ CREATE TABLE IF NOT EXISTS albuns (
     artista_id INT NOT NULL,
     gravadora_id INT,
     genero_id INT,
-    descricao VARCHAR(255),
+    descricao TEXT,
     data_lancamento_original DATE,
     capa_url VARCHAR(255) DEFAULT NULL COMMENT 'URL ou caminho da capa do álbum',
     PRIMARY KEY (id),
@@ -75,12 +77,32 @@ INSERT INTO generos (nome) VALUES
 -- ARTISTAS
 -- ============================================
 
-INSERT INTO artistas (nome, pais_origem, biografia) VALUES
-('Michael Jackson', 'Estados Unidos', 'Conhecido como "Rei do Pop", um dos artistas mais influentes da história da música.'),
-('2Pac', 'Estados Unidos', 'Rapper e ator, um dos nomes mais influentes do hip hop dos anos 90.'),
-('Notorious B.I.G.', 'Estados Unidos', 'Rapper de Nova York, ícone do hip hop da costa leste dos EUA.'),
-('N.W.A', 'Estados Unidos', 'Grupo de hip hop de Compton, pioneiro do gangsta rap.'),
-('Daniel Caesar', 'Canadá', 'Cantor e compositor canadense de R&B contemporâneo.');
+INSERT INTO artistas (nome, pais_origem, data_nascimento, data_falecimento, biografia, foto_url) VALUES
+
+('Michael Jackson', 'Estados Unidos', 
+'1958-08-29', '2009-06-25',
+'Michael Jackson foi um cantor, compositor, dançarino e performer norte-americano conhecido mundialmente como o Rei do Pop. Sua carreira começou ainda na infância com o grupo Jackson 5, mas foi em carreira solo que redefiniu a música pop através de álbuns históricos, videoclipes revolucionários e apresentações icônicas. Sua influência artística atravessa gerações, tornando-o um dos artistas mais importantes e premiados da história da música.',
+'/assets/artistas/michael_jackson.jpg'),
+
+('2Pac', 'Estados Unidos', 
+'1971-06-16', '1996-09-13',
+'Tupac Amaru Shakur, conhecido como 2Pac, foi um rapper, compositor e ator norte-americano considerado uma das maiores figuras da história do hip hop. Suas letras abordavam desigualdade social, violência, racismo, política e conflitos pessoais, equilibrando crítica social e vulnerabilidade. Mesmo após sua morte em 1996, permanece como uma das maiores referências culturais da música.',
+'/assets/artistas/tupac.jpg'),
+
+('Notorious B.I.G.', 'Estados Unidos', 
+'1972-05-21', '1997-03-09',
+'Christopher Wallace, conhecido artisticamente como The Notorious B.I.G. ou Biggie Smalls, foi um rapper norte-americano cuja habilidade narrativa e técnica lírica transformaram o hip hop da costa leste. Seus álbuns Ready to Die e Life After Death são considerados clássicos absolutos do gênero e consolidaram seu legado como um dos maiores MCs de todos os tempos.',
+'/assets/artistas/notorius_big.jpg'),
+
+('N.W.A', 'Estados Unidos', 
+NULL, NULL,
+'O N.W.A foi um grupo pioneiro do gangsta rap formado em Compton, Califórnia. Composto por artistas como Dr. Dre, Ice Cube, Eazy-E, MC Ren e DJ Yella, revolucionou o hip hop ao retratar de forma direta a realidade das periferias americanas. Sua influência musical e cultural permanece presente em diversas gerações de artistas.',
+'/assets/artistas/nwa.jpg'),
+
+('Daniel Caesar', 'Canadá', 
+'1995-04-05', NULL,
+'Daniel Caesar é um cantor, compositor e produtor canadense reconhecido por unir R&B, soul, gospel e jazz em uma sonoridade intimista. Sua música explora temas como amor, espiritualidade e crescimento pessoal, destacando-se pelos vocais marcantes e pela produção refinada. É considerado um dos principais nomes do R&B contemporâneo.',
+'/assets/artistas/daniel_caesar.jpg');
 
 -- ============================================
 -- GRAVADORAS
@@ -95,63 +117,72 @@ INSERT INTO gravadoras (nome, pais) VALUES
 ('Golden Child Recordings', 'Canadá');
 
 -- ============================================
--- ÁLBUNS (2 por artista)
+-- ÁLBUNS
 -- ============================================
 
+INSERT INTO albuns
+(nome_album, artista_id, gravadora_id, genero_id, descricao, data_lancamento_original, capa_url)
+VALUES
+
 -- Michael Jackson
-INSERT INTO albuns (nome_album, artista_id, gravadora_id, genero_id, descricao, data_lancamento_original) VALUES
-('Thriller', 1, 1, 1, 'O álbum mais vendido da história, com hits como Billie Jean e Beat It.', '1982-11-30'),
-('Bad', 1, 1, 1, 'Sétimo álbum de estúdio, sucessor de Thriller.', '1987-08-31');
+
+('Thriller',1,1,1,
+'Lançado em 1982, Thriller consolidou Michael Jackson como o maior artista pop de sua geração e tornou-se o álbum mais vendido da história da música. Produzido por Quincy Jones, combina pop, rock, R&B e funk em uma sequência de faixas que redefiniu os padrões da indústria musical. Com sucessos como Billie Jean, Beat It e Thriller, o álbum marcou uma revolução tanto sonora quanto visual, influenciando artistas e produtores por décadas.',
+'1982-11-30',
+'/assets/albuns/thriller.jpg'),
+
+('Bad',1,1,1,
+'Bad, lançado em 1987, representa a continuidade do sucesso de Thriller, mas com uma identidade própria e mais agressiva. Michael Jackson explorou uma sonoridade moderna que mistura pop, funk, rock e R&B, estabelecendo recordes ao colocar cinco singles consecutivos no topo da Billboard Hot 100. O álbum reafirmou sua posição como um dos maiores artistas da história.',
+'1987-08-31',
+'/assets/albuns/bad.jpg'),
 
 -- 2Pac
-INSERT INTO albuns (nome_album, artista_id, gravadora_id, genero_id, descricao, data_lancamento_original) VALUES
-('All Eyez on Me', 2, 2, 4, 'Álbum duplo lançado pela Death Row Records, um dos marcos do gangsta rap.', '1996-02-13'),
-('Me Against the World', 2, 3, 4, 'Álbum introspectivo lançado enquanto 2Pac estava preso.', '1995-03-14');
 
--- Notorious B.I.G.
-INSERT INTO albuns (nome_album, artista_id, gravadora_id, genero_id, descricao, data_lancamento_original) VALUES
-('Ready to Die', 3, 4, 3, 'Álbum de estreia, considerado um clássico do hip hop dos anos 90.', '1994-09-13'),
-('Life After Death', 3, 4, 3, 'Álbum duplo lançado postumamente, 16 dias após sua morte.', '1997-03-25');
+('All Eyez on Me',2,2,4,
+'All Eyez on Me é o quarto álbum de estúdio de 2Pac e o primeiro álbum duplo da história do hip hop lançado por um artista solo. Lançado em 1996, após sua saída da prisão, apresenta uma combinação de faixas introspectivas e hinos da costa oeste. É considerado uma das obras mais influentes do rap, refletindo tanto o carisma quanto os conflitos vividos por Tupac Shakur.',
+'1996-02-13',
+'/assets/albuns/all_eyez_on_me.jpg'),
+
+('Me Against the World',2,3,4,
+'Me Against the World, lançado em 1995, é frequentemente considerado o trabalho mais pessoal de 2Pac. O álbum apresenta reflexões sobre desigualdade, violência, fama e mortalidade, equilibrando vulnerabilidade e crítica social. Tornou-se um marco do hip hop pela profundidade de suas letras e pela autenticidade emocional.',
+'1995-03-14',
+'/assets/albuns/me_against_the_world.jpg'),
+
+-- Notorius B.I.G
+
+('Ready to Die',3,4,3,
+'Ready to Die marcou a estreia de The Notorious B.I.G. em 1994 e tornou-se um dos álbuns mais importantes da história do hip hop. Narrando a realidade das ruas do Brooklyn, combina storytelling detalhado, produção refinada e um fluxo marcante. Faixas como Juicy e Big Poppa transformaram Biggie em um dos maiores nomes do rap.',
+'1994-09-13',
+'/assets/albuns/ready_to_die.jpg'),
+
+('Life After Death',3,4,3,
+'Life After Death foi lançado em 1997 poucas semanas após a morte de The Notorious B.I.G. O álbum duplo apresenta um equilíbrio entre faixas introspectivas e sucessos comerciais, consolidando o legado do rapper. É considerado um dos melhores álbuns de rap de todos os tempos e um símbolo da era de ouro do hip hop.',
+'1997-03-25',
+'/assets/albuns/life_after_death.jpg'),
 
 -- N.W.A
-INSERT INTO albuns (nome_album, artista_id, gravadora_id, genero_id, descricao, data_lancamento_original) VALUES
-('Straight Outta Compton', 4, 5, 4, 'Álbum de estreia do grupo, marco fundador do gangsta rap.', '1988-08-08'),
-('Efil4zaggin', 4, 5, 4, 'Segundo álbum de estúdio, primeiro a chegar ao topo da Billboard 200.', '1991-05-28');
+
+('Straight Outta Compton',4,5,4,
+'Straight Outta Compton apresentou o N.W.A ao mundo em 1988 e redefiniu o gangsta rap. Com letras diretas e provocativas, denunciava violência policial, desigualdade racial e a realidade das periferias de Los Angeles. Sua influência ultrapassou a música, tornando-se um marco cultural e político.',
+'1988-08-08',
+'/assets/albuns/straight_outta_compton.jpg'),
+
+('Efil4zaggin',4,5,4,
+'Efil4zaggin, lançado em 1991, deu continuidade ao impacto do N.W.A com uma abordagem ainda mais agressiva. O álbum alcançou o topo da Billboard e consolidou o grupo como uma das maiores forças do hip hop. Suas letras e produção reforçaram a identidade do gangsta rap durante os anos 90.',
+'1991-05-28',
+'/assets/albuns/efil4zaggin.jpg'),
 
 -- Daniel Caesar
-INSERT INTO albuns (nome_album, artista_id, gravadora_id, genero_id, descricao, data_lancamento_original) VALUES
-('Freudian', 5, 6, 2, 'Álbum de estreia, indicado ao Grammy de Melhor Álbum de R&B.', '2017-08-25'),
-('CASE STUDY 01', 5, 6, 2, 'Segundo álbum de estúdio, com sonoridade mais experimental.', '2019-06-28');
 
-UPDATE albuns SET capa_url = '/assets/albuns/thriller.jpg'
-WHERE id = 1;
+('Freudian',5,6,2,
+'Freudian, lançado em 2017, é o álbum de estreia de Daniel Caesar e uma das obras mais elogiadas do R&B contemporâneo. Misturando soul, gospel e influências do jazz, aborda temas como amor, espiritualidade e vulnerabilidade. A produção minimalista e os vocais marcantes fizeram do álbum um clássico moderno do gênero.',
+'2017-08-25',
+'/assets/albuns/freudian.jpg'),
 
-UPDATE albuns SET capa_url = '/assets/albuns/bad.jpg'
-WHERE id = 2;
-
-UPDATE albuns SET capa_url = '/assets/albuns/all_eyez_on_me.jpg'
-WHERE id = 3;
-
-UPDATE albuns SET capa_url = '/assets/albuns/me_against_the_world.jpg'
-WHERE id = 4;
-
-UPDATE albuns SET capa_url = '/assets/albuns/ready_to_die.jpg'
-WHERE id = 5;
-
-UPDATE albuns SET capa_url = '/assets/albuns/life_after_death.jpg'
-WHERE id = 6;
-
-UPDATE albuns SET capa_url = '/assets/albuns/straight_outta_compton.jpg'
-WHERE id = 7;
-
-UPDATE albuns SET capa_url = '/assets/albuns/efil4zaggin.jpg'
-WHERE id = 8;
-
-UPDATE albuns SET capa_url = '/assets/albuns/freudian.jpg'
-WHERE id = 9;
-
-UPDATE albuns SET capa_url = '/assets/albuns/case_study_01.jpg'
-WHERE id = 10;
+('CASE STUDY 01',5,6,2,
+'CASE STUDY 01, lançado em 2019, amplia a proposta artística de Daniel Caesar ao explorar relacionamentos, fama e amadurecimento pessoal. Com participações especiais e uma produção sofisticada, o álbum combina R&B contemporâneo, soul e elementos experimentais, consolidando sua identidade musical.',
+'2019-06-28',
+'/assets/albuns/case_study_01.jpg');
 
 -- ============================================
 -- FAIXAS
@@ -278,6 +309,7 @@ INSERT INTO faixas (album_id, numero_faixa, titulo, duracao_segundos, lado) VALU
 CREATE VIEW vw_card_album AS
 SELECT
     albuns.id AS album_id,
+    artistas.id AS artista_id,
     albuns.nome_album,
     albuns.descricao,
     albuns.data_lancamento_original,
@@ -297,3 +329,20 @@ GROUP BY
     albuns.data_lancamento_original,
     albuns.capa_url,
     artistas.nome;
+
+CREATE VIEW vw_album_tracks AS
+SELECT
+    albuns.id AS album_id,
+    artistas.id AS artista_id,
+    albuns.nome_album,
+    artistas.nome AS nome_artista,
+    
+    faixas.id AS faixa_id,
+    faixas.numero_faixa,
+    faixas.titulo, 
+    faixas.duracao_segundos
+FROM albuns
+INNER JOIN artistas
+    ON albuns.artista_id = artistas.id
+INNER JOIN faixas
+    ON faixas.album_id = albuns.id;

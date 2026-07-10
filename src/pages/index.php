@@ -18,6 +18,7 @@ $gravadoras = $conexao->query('SELECT * FROM gravadoras');
 
     <title>WATMM</title>
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <header>
@@ -46,7 +47,7 @@ $gravadoras = $conexao->query('SELECT * FROM gravadoras');
                     <div class="card-infos-wrapper">
                         <div class="card-infos">
                             <span class="artist"><?= $album['nome_artista']?></span>
-                            <span class="release"><?= $album['ano_lancamento'] ?></span>
+                            <span class="release"><?= date('Y', strtotime($album['data_lancamento_original'])) ?></span>
                         </div>
                         <div class="card-infos">
                             <span class="tracks"><?= $album['qtd_faixas'] ?> Tracks</span>
